@@ -1,16 +1,72 @@
 [
   {
-    "id": "example-1",
-    "question": "Does requests keep the Authorization header when a redirect goes from http to https on the same host?",
+    "id": "q01",
+    "question": "When does requests remove the Authorization header during a redirect?",
     "expected_file": "sessions.py",
     "expected_function": "SessionRedirectMixin.should_strip_auth",
-    "expected_answer": "Yes. For an http to https redirect on the same host with the standard ports, should_strip_auth returns False, so the header is kept (lines 137 to 143)."
+    "expected_answer": "Requests removes the Authorization header when the redirect changes to a different host, with exceptions for some redirects that only change between equivalent HTTP and HTTPS ports."
   },
   {
-    "id": "example-2",
-    "question": "Which company pays for hosting the requests documentation?",
+    "id": "q02",
+    "question": "How does requests determine the redirect URL from a response?",
+    "expected_file": "sessions.py",
+    "expected_function": "SessionRedirectMixin.get_redirect_target",
+    "expected_answer": "Requests checks whether the response is a redirect and, if it is, reads and decodes the Location header to determine the redirect URL."
+  },
+  {
+    "id": "q03",
+    "question": "How does requests decide whether a URL should bypass configured proxies?",
+    "expected_file": "utils.py",
+    "expected_function": "should_bypass_proxies",
+    "expected_answer": "Requests checks the URL against no_proxy settings and determines whether the hostname, port, or IP address matches a rule that should bypass the proxy."
+  },
+  {
+    "id": "q04",
+    "question": "How does requests choose which proxy to use for a URL?",
+    "expected_file": "utils.py",
+    "expected_function": "select_proxy",
+    "expected_answer": "Requests examines the URL scheme and hostname and selects the most specific matching proxy configuration."
+  },
+  {
+    "id": "q05",
+    "question": "What default HTTP headers does requests add to a request?",
+    "expected_file": "utils.py",
+    "expected_function": "default_headers",
+    "expected_answer": "Requests creates default headers that include User-Agent, Accept-Encoding, Accept, and Connection."
+  },
+  {
+    "id": "q06",
+    "question": "How does requests determine the Content-Length header for a prepared request?",
+    "expected_file": "models.py",
+    "expected_function": "PreparedRequest.prepare_content_length",
+    "expected_answer": "Requests calculates the length of the request body when possible and sets the Content-Length header based on that value."
+  },
+  {
+    "id": "q07",
+    "question": "How does requests obtain authentication information when no explicit authentication is supplied?",
+    "expected_file": "models.py",
+    "expected_function": "PreparedRequest.prepare_auth",
+    "expected_answer": "Requests checks the request URL for embedded username and password credentials and uses them for authentication when explicit authentication was not provided."
+  },
+  {
+    "id": "q08",
+    "question": "How does requests create an authentication header for a proxy?",
+    "expected_file": "adapters.py",
+    "expected_function": "HTTPAdapter.proxy_headers",
+    "expected_answer": "Requests extracts the username and password from the proxy URL and creates a Proxy-Authorization header using Basic authentication when credentials are present."
+  },
+  {
+    "id": "q09",
+    "question": "How does requests configure HTTPS certificate verification?",
+    "expected_file": "adapters.py",
+    "expected_function": "HTTPAdapter.cert_verify",
+    "expected_answer": "Requests checks whether the connection uses HTTPS and whether verification is enabled, then configures the appropriate certificate authority file or directory."
+  },
+  {
+    "id": "q10",
+    "question": "Why did the requests developers choose their current redirect authentication policy instead of another design?",
     "expected_file": null,
     "expected_function": null,
-    "expected_answer": "The code cannot answer this. A correct reply says not found in the code shown, with null file and line."
+    "expected_answer": "The code cannot answer this because it asks about the developers' design reasoning rather than behavior that can be determined from the source code."
   }
 ]
