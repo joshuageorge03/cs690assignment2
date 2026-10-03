@@ -40,8 +40,57 @@ def split_file(path: Path, root: Path) -> list[Chunk]:
     and each decorator node has its own .lineno. A class node has .name and .body.
     Read the file with encoding="utf-8".
     """
-    raise NotImplementedError("Step 2: write split_file in askcode/split.py")
+    source = path.read_text(encoding="utf-8")
+    tree = ast.parse(source)
+    lines = source.split("\n")
 
+    chunks = []
+
+    def add_chunk(node, name):
+        start_line = node.lineno
+
+        if node.decorator_list:
+            start_line = min(
+                decorator.lineno
+                for decorator in node.decorator_list
+            )
+
+        end_line = node.end_lineno
+
+        text = "\n".join(
+            lines[start_line - 1:end_line]
+        )
+
+        chunks.append(
+            Chunk(
+                file=path.relative_to(root).as_posix(),
+                name=name,
+                start_line=start_line,
+                end_line=end_line,
+                text=text,
+            )
+        )
+
+    for node in tree.body:
+        if isinstance(
+            node,
+            (ast.FunctionDef, ast.AsyncFunctionDef),
+        ):
+            add_chunk(node, node.name)
+
+        elif isinstance(node, ast.ClassDef):
+            for item in node.body:
+                if isinstance(
+                    item,
+                    (ast.FunctionDef, ast.AsyncFunctionDef),
+                ):
+                    add_chunk(
+                        item,
+                        f"{node.name}.{item.name}",
+                    )
+
+    return chunks
+    
 
 def split_corpus(root: Path = CORPUS_DIR) -> list[Chunk]:
     """Return the chunks of every .py file under `root`, including subfolders.
@@ -50,4 +99,12 @@ def split_corpus(root: Path = CORPUS_DIR) -> list[Chunk]:
     and sorted as plain strings. Keep each file's chunks in file order.
     For the requests codebase this returns 230 chunks.
     """
-    raise NotImplementedError("Step 2: write split_corpus in askcode/split.py")
+    files = sorted(
+        root.rglob("*.py"),
+        key=lambda path: path.relative_to(root).as_posix(),
+    )
+    chunks = []
+
+    for path in files:
+        chunks.extend(split_file(path, root))
+    return chunks

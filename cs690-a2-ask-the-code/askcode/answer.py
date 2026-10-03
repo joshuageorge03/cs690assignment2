@@ -30,4 +30,59 @@ def parse_reply(text: str) -> dict:
 
     Return a new dict with exactly the three keys and the values from the reply.
     """
-    raise NotImplementedError("Step 4: write parse_reply in askcode/answer.py")
+    try:
+        stripped = text.strip()
+        if stripped.startswith("```"):
+            lines = stripped.split("\n")
+
+            if lines[0] not in ("```", "```json"):
+                raise BadReply("invalid code fence")
+
+            if len(lines) < 3 or lines[-1] != "```":
+                raise BadReply("invalid code fence")
+
+            stripped = "\n".join(lines[1:-1]).strip()
+
+        # exactly one JSON object.
+        data = json.loads(stripped)
+
+        if not isinstance(data, dict):
+            raise BadReply("reply must be a JSON object")
+        expected_keys = {"answer", "file", "line"}
+
+        if set(data.keys()) != expected_keys:
+            raise BadReply("reply must have exactly answer, file, and line")
+
+        answer = data["answer"]
+        file = data["file"]
+        line = data["line"]
+
+        # non-empty string.
+        if not isinstance(answer, str) or not answer.strip():
+            raise BadReply("answer must be a non-empty string")
+
+        # file = null or a non-empty string
+        if file is not None:
+            if not isinstance(file, str) or not file.strip():
+                raise BadReply("file must be a non-empty string or null")
+
+        # line must be null or an integer >= 1
+        if line is not None:
+            if isinstance(line, bool) or not isinstance(line, int) or line < 1:
+                raise BadReply("line must be an integer of at least 1 or null")
+
+        # file and line must either both be null or both be set.
+        if (file is None) != (line is None):
+            raise BadReply("file and line must both be null or both be set")
+
+        return {
+            "answer": answer,
+            "file": file,
+            "line": line,
+        }
+
+    except BadReply:
+        raise
+
+    except Exception as exc:
+        raise BadReply("invalid reply") from exc
