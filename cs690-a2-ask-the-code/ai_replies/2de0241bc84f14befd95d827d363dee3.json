@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "2de0241bc84f14befd95d827d363dee3",
+  "asked_at": "2026-10-03T22:44:37+00:00",
+  "input_tokens": 2966,
+  "output_tokens": 572,
+  "text": "{\n  \"answer\": \"Requests normally determines Content-Length while preparing the request, not in HTTPAdapter.send. PreparedRequest.prepare_body calls super_len(body). For strings, it first encodes them as UTF-8; otherwise it checks, in order: __len__(), a .len attribute, the file descriptor size via fileno()/fstat(), or—when available—seeks to the end and restores the original position. The returned value is total_length minus the current read position. If a positive length is found, Requests sets Content-Length to that value. For a body whose length cannot be determined, it uses Transfer-Encoding: chunked instead. In HTTPAdapter.send, chunked is selected only when the body is not None and Content-Length is absent. During most redirects, Requests removes Content-Length, Content-Type, and Transfer-Encoding and clears the body before preparing the redirected request again; temporary and permanent redirects preserve the body and headers.\",\n  \"file\": [\n    \"requests/models.py — PreparedRequest.prepare_body and prepare_content_length\",\n    \"requests/utils.py — super_len\"\n  ],\n  \"line\": [\n    \"requests/utils.py:135-201\",\n    \"HTTPAdapter.send:650 and 667-679\",\n    \"SessionRedirectMixin.resolve_redirects:223-233\"\n  ]\n}"
+}

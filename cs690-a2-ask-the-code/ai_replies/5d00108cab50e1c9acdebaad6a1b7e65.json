@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "5d00108cab50e1c9acdebaad6a1b7e65",
+  "asked_at": "2026-10-03T21:58:16+00:00",
+  "input_tokens": 2345,
+  "output_tokens": 97,
+  "text": "{\"answer\":\"HTTPS certificate verification defaults to enabled (`verify = True`). For HTTPS requests with verification enabled, the connection uses `CERT_REQUIRED`. If `verify` is a string path, requests validates that the path exists and configures it as either a CA certificate file or directory; otherwise, the connection's default certificates are used. If verification is disabled, it uses `CERT_NONE` and clears the CA certificate settings.\",\"file\":\"adapters.py\",\"line\":316}"
+}

@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "3bbad4e655f5dc48d84638f0d936e3de",
+  "asked_at": "2026-10-03T22:03:46+00:00",
+  "input_tokens": 54694,
+  "output_tokens": 115,
+  "text": "{\"answer\":\"For a non-streaming body, `prepare_content_length` calls `super_len(body)` and sets `Content-Length` to the resulting length when it is nonzero. If there is no body and the method is neither `GET` nor `HEAD`, it sets `Content-Length` to `\\\"0\\\"`. For streaming bodies, it also uses `super_len`; if a length is available it sets `Content-Length`, otherwise it sets `Transfer-Encoding` to `\\\"chunked\\\"`.\",\"file\":\"models.py\",\"line\":572}"
+}

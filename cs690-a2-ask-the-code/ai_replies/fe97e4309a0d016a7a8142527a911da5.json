@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "fe97e4309a0d016a7a8142527a911da5",
+  "asked_at": "2026-10-03T21:58:01+00:00",
+  "input_tokens": 1956,
+  "output_tokens": 133,
+  "text": "{\"answer\":\"Requests removes the Authorization header when the redirect changes the hostname, or when it changes the port or scheme—except for standard-port HTTP-to-HTTPS redirects and equivalent default-port usage on the same scheme.\",\"file\":\"sessions.py\",\"line\":131}"
+}

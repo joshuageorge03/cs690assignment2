@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "516b2feb2b4f950ebc6220e43ca71827",
+  "asked_at": "2026-10-03T21:58:08+00:00",
+  "input_tokens": 1415,
+  "output_tokens": 162,
+  "text": "{\"answer\":\"The code delegates proxy selection to `select_proxy(request.url, proxies)`. If it returns a proxy, requests ensures it has an HTTP scheme, parses and validates it, then obtains a proxy manager for it; the selection logic itself is not shown.\",\"file\":\"adapters.py\",\"line\":466}"
+}

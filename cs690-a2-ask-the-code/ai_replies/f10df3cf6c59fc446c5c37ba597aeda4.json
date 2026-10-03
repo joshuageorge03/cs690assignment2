@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "f10df3cf6c59fc446c5c37ba597aeda4",
+  "asked_at": "2026-10-03T21:58:05+00:00",
+  "input_tokens": 1446,
+  "output_tokens": 109,
+  "text": "{\"answer\":\"It first checks the URL's hostname; URLs without one bypass proxies. It then checks the configured or environment `no_proxy` list: IPv4 addresses can match directly or through a CIDR network, while other hostnames match by suffix, including an optional port. If there is no match, it temporarily sets `no_proxy` and calls `proxy_bypass`; a true result bypasses proxies, while errors are treated as false. Otherwise, it does not bypass.\",\"file\":\"utils.py\",\"line\":765}"
+}

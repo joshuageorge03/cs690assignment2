@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "b3f2b9aba6379775b3544a71401bb8dd",
+  "asked_at": "2026-10-03T22:05:00+00:00",
+  "input_tokens": 395,
+  "output_tokens": 101,
+  "text": "{\"answer\":\"If a body is present, requests computes its length with super_len(body) and sets the Content-Length header when the length is nonzero. If there is no body and the method is not GET or HEAD, it sets Content-Length to \\\"0\\\" when the header is not already present. If a body exists but its length is unavailable or zero, it does not set Content-Length and falls back to Transfer-Encoding: chunked.\",\"file\":\"models.py\",\"line\":572}"
+}

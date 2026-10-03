@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "fcaad25e6e64a0f1cff70405bae3650f",
+  "asked_at": "2026-10-03T22:04:53+00:00",
+  "input_tokens": 486,
+  "output_tokens": 67,
+  "text": "{\"answer\":\"It checks whether the response is a redirect via `resp.is_redirect`. If so, it reads the `location` header, encodes it as Latin-1, and converts it to a native UTF-8 string; otherwise, it returns `None`.\",\"file\":\"sessions.py\",\"line\":115}"
+}

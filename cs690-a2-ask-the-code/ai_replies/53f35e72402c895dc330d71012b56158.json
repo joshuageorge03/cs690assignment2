@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "53f35e72402c895dc330d71012b56158",
+  "asked_at": "2026-10-03T22:44:08+00:00",
+  "input_tokens": 1785,
+  "output_tokens": 243,
+  "text": "{\n  \"answer\": \"Requests removes the Authorization header when a redirect changes the security origin: the hostname changes, or the scheme or port changes. Exceptions: it preserves Authorization for HTTP-to-HTTPS redirects from standard ports (80 or unspecified to 443 or unspecified), and for redirects that only switch between explicit and implicit default ports for the same scheme. Proxy-Authorization is handled separately by rebuild_proxies and is removed and potentially rebuilt for each redirected request.\",\n  \"file\": \"requests/sessions.py\",\n  \"line\": \"127-157 (Authorization); 302-331 (Proxy-Authorization)\"\n}"
+}

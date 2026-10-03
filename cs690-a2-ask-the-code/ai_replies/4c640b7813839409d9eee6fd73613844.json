@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "4c640b7813839409d9eee6fd73613844",
+  "asked_at": "2026-10-03T22:04:57+00:00",
+  "input_tokens": 423,
+  "output_tokens": 73,
+  "text": "{\"answer\":\"It parses the URL and checks the proxy mapping in this order: scheme://hostname, scheme, all://hostname, then all. It uses the first matching proxy; if the URL has no hostname, it checks the scheme and then \\\"all\\\". If none match, it returns None.\",\"file\":\"utils.py\",\"line\":845}"
+}

@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "b6260b3ca195bc41b6b38024ca7ac2f9",
+  "asked_at": "2026-10-03T22:05:01+00:00",
+  "input_tokens": 418,
+  "output_tokens": 47,
+  "text": "{\"answer\":\"When no explicit authentication is supplied, requests extracts authentication information from the URL using get_auth_from_url(self.url). It uses the extracted credentials if any are present.\",\"file\":\"models.py\",\"line\":593}"
+}

@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "d708c68a9c6963754d834c7e8a38dc78",
+  "asked_at": "2026-10-03T22:05:04+00:00",
+  "input_tokens": 813,
+  "output_tokens": 139,
+  "text": "{\"answer\":\"For HTTPS URLs with verify enabled, requests sets conn.cert_reqs to \\\"CERT_REQUIRED\\\". If verify is a path, it checks that the path exists and uses it as either conn.ca_certs (file) or conn.ca_cert_dir (directory). If verification is disabled or the URL is not HTTPS, it sets conn.cert_reqs to \\\"CERT_NONE\\\" and clears the CA settings. A provided client certificate is configured as cert_file, with an optional key_file, and both paths are validated.\",\"file\":\"adapters.py\",\"line\":316}"
+}

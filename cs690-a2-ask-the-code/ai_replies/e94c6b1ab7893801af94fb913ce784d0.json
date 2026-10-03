@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "e94c6b1ab7893801af94fb913ce784d0",
+  "asked_at": "2026-10-03T22:44:30+00:00",
+  "input_tokens": 796,
+  "output_tokens": 562,
+  "text": "{\n  \"answer\": {\n    \"requests_default_headers\": {\n      \"User-Agent\": \"python-requests/<version>\",\n      \"Accept-Encoding\": \"gzip, deflate, br\",\n      \"Accept\": \"*/*\",\n      \"Connection\": \"keep-alive\"\n    },\n    \"notes\": [\n      \"The exact Accept-Encoding value depends on installed optional compression support and Requests version; it may also include zstd.\",\n      \"Requests adds Content-Length and sometimes Content-Type when preparing a request with a body.\",\n      \"The HTTP transport may add Host and other connection-specific headers.\",\n      \"Proxy-Authorization is added only when proxy credentials are present.\"\n    ]\n  },\n  \"file\": [\n    \"requests/utils.py — default_headers()\",\n    \"requests/sessions.py — Session.__init__()\"\n  ],\n  \"line\": \"The supplied HTTPAdapter.add_headers() implementation at lines 578–590 adds no headers by default; proxy authentication is handled by proxy_headers() at lines 592–611.\"\n}"
+}

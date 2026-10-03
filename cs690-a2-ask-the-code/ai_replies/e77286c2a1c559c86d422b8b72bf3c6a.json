@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "e77286c2a1c559c86d422b8b72bf3c6a",
+  "asked_at": "2026-10-03T22:44:46+00:00",
+  "input_tokens": 2216,
+  "output_tokens": 387,
+  "text": "{\n  \"answer\": \"Requests does not create the proxy authentication header in `get_connection_with_tls_context` itself. That method selects and parses the proxy URL, then obtains a proxy manager via `self.proxy_manager_for(proxy)` (adapters.py, lines 475–484). `HTTPAdapter.proxy_manager_for()` extracts credentials embedded in the proxy URL, such as `http://user:password@proxy.example:8080`, and calls `proxy_headers(proxy)`. `proxy_headers()` uses `get_auth_from_url()` to obtain the username and password, then creates a Basic authentication value with `_basic_auth_str()` and returns `{\\\"Proxy-Authorization\\\": \\\"Basic <base64(user:password)>\\\"}`. The resulting headers are passed to urllib3's `ProxyManager`, which sends them to the proxy. This is distinct from the destination-server `Authorization` header. If the proxy URL has no credentials, Requests does not generate a proxy authentication header; a proxy may instead respond with `407 Proxy Authentication Required`.\",\n  \"file\": \"src/requests/adapters.py\",\n  \"line\": \"HTTPAdapter.get_connection_with_tls_context: 466–486; HTTPAdapter.proxy_manager_for and proxy_headers: approximately 240–285 (exact lines vary by Requests version)\"\n}"
+}

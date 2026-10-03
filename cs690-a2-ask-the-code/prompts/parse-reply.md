@@ -1,0 +1,1 @@
+Asked ChatGPT to help implement parse_reply in askcode/answer.py based on the Step 4 Part B requirements. I asked for the function to only accept exactly one JSON object with the keys answer, file, and line, check that each value has the correct type, reject extra text or invalid JSON, and raise BadReply whenever the response does not match the required format.

@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "65201d40915a5d50c72eda1ee28c6c7a",
+  "asked_at": "2026-10-03T22:05:02+00:00",
+  "input_tokens": 421,
+  "output_tokens": 56,
+  "text": "{\"answer\":\"It extracts the username and password from the proxy URL using get_auth_from_url, then sets the \\\"Proxy-Authorization\\\" header to _basic_auth_str(username, password) when a username is present.\",\"file\":\"adapters.py\",\"line\":606}"
+}

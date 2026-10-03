@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "a86661977089faeaf73aacc338628bcf",
+  "asked_at": "2026-10-03T22:44:23+00:00",
+  "input_tokens": 1244,
+  "output_tokens": 560,
+  "text": "{\n  \"answer\": \"Requests chooses the proxy before creating the connection, in HTTPAdapter.get_connection_with_tls_context at line 466: `select_proxy(request.url, proxies)`. The proxy mapping is checked for the request URL's scheme, typically in this order: `<scheme>_proxy`, `<scheme>`, `all_proxy`, then `all` (for example, `https_proxy` before `http_proxy` or `all`). Before this, Session-level proxy resolution may merge explicitly supplied proxies with environment proxies when `trust_env=True`, unless the URL matches `no_proxy`. If no proxy is selected, Requests uses its normal PoolManager. If one is selected, it normalizes the URL, creates or reuses a ProxyManager keyed by that proxy URL, and obtains the connection through it. SOCKS proxies use `SOCKSProxyManager`; other proxies use urllib3's regular `ProxyManager`.\",\n  \"file\": \"requests.adapters.HTTPAdapter.get_connection_with_tls_context (selection and use: lines 446-491); requests.utils.select_proxy (proxy-key precedence); requests.sessions.resolve_proxies (explicit/environment proxies and no_proxy); requests.adapters.HTTPAdapter.proxy_manager_for (proxy-manager type and caching: lines 266-302)\",\n  \"line\": \"466 selects the proxy; 475-491 choose ProxyManager versus the direct PoolManager; 278-300 cache and construct the selected proxy manager\"\n}"
+}

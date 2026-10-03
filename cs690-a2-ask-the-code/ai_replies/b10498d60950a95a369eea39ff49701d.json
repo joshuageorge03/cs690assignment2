@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "b10498d60950a95a369eea39ff49701d",
+  "asked_at": "2026-10-03T22:44:13+00:00",
+  "input_tokens": 2801,
+  "output_tokens": 316,
+  "text": "{\n  \"answer\": \"HTTPAdapter.send does not determine or follow redirect URLs. It sends the request with urllib3 redirects disabled (`redirect=False`, adapters.py:667-679), then builds a Response. SessionRedirectMixin.resolve_redirects handles redirects: it calls `get_redirect_target(resp)` to read the response's `Location` header (only for redirect status codes), then normalizes the value. Scheme-relative URLs (`//host/path`) inherit the original scheme; relative URLs are resolved against `resp.url` using `urljoin`; fragments are preserved or updated; and the result is percent-encoded with `requote_uri`. The normalized URL becomes `prepared_request.url`, and Requests sends that request. The response's final URL is stored in `Response.url`, while intermediate redirect responses are stored in `Response.history`.\",\n  \"file\": \"requests/adapters.py; requests/sessions.py; requests/models.py\",\n  \"line\": \"adapters.py:667-679, 719; sessions.py:175-217, 219-279; models.py:676-685\"\n}"
+}

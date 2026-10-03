@@ -1,0 +1,74 @@
+id,question,expected_file,expected_function,retrieved,hit,hit_rank,valid_json,reply_answer,reply_file,reply_line,right_place,input_tokens,output_tokens,provider,model,price_input_per_mtok,price_output_per_mtok,raw_reply,correct
+q01,When does requests remove the Authorization header during a redirect?,sessions.py,SessionRedirectMixin.should_strip_auth,sessions.py::SessionRedirectMixin.should_strip_auth; sessions.py::SessionRedirectMixin.rebuild_proxies; adapters.py::HTTPAdapter.send,yes,1,no,,,,no,1785,243,openai,gpt-5.6-luna,0.2,1.2,"{
+  ""answer"": ""Requests removes the Authorization header when a redirect changes the security origin: the hostname changes, or the scheme or port changes. Exceptions: it preserves Authorization for HTTP-to-HTTPS redirects from standard ports (80 or unspecified to 443 or unspecified), and for redirects that only switch between explicit and implicit default ports for the same scheme. Proxy-Authorization is handled separately by rebuild_proxies and is removed and potentially rebuilt for each redirected request."",
+  ""file"": ""requests/sessions.py"",
+  ""line"": ""127-157 (Authorization); 302-331 (Proxy-Authorization)""
+}",No
+q02,How does requests determine the redirect URL from a response?,sessions.py,SessionRedirectMixin.get_redirect_target,adapters.py::HTTPAdapter.send; models.py::Response.__init__; sessions.py::SessionRedirectMixin.resolve_redirects,no,,no,,,,no,2801,316,openai,gpt-5.6-luna,0.2,1.2,"{
+  ""answer"": ""HTTPAdapter.send does not determine or follow redirect URLs. It sends the request with urllib3 redirects disabled (`redirect=False`, adapters.py:667-679), then builds a Response. SessionRedirectMixin.resolve_redirects handles redirects: it calls `get_redirect_target(resp)` to read the response's `Location` header (only for redirect status codes), then normalizes the value. Scheme-relative URLs (`//host/path`) inherit the original scheme; relative URLs are resolved against `resp.url` using `urljoin`; fragments are preserved or updated; and the result is percent-encoded with `requote_uri`. The normalized URL becomes `prepared_request.url`, and Requests sends that request. The response's final URL is stored in `Response.url`, while intermediate redirect responses are stored in `Response.history`."",
+  ""file"": ""requests/adapters.py; requests/sessions.py; requests/models.py"",
+  ""line"": ""adapters.py:667-679, 719; sessions.py:175-217, 219-279; models.py:676-685""
+}",No 
+q03,How does requests decide whether a URL should bypass configured proxies?,utils.py,should_bypass_proxies,utils.py::should_bypass_proxies; utils.py::resolve_proxies; sessions.py::SessionRedirectMixin.should_strip_auth,yes,1,no,,,,no,1275,271,openai,gpt-5.6-luna,0.2,1.2,"{
+  ""answer"": ""Requests bypasses proxies in two stages. In `resolve_proxies`, it calls `should_bypass_proxies` when `trust_env` is enabled. `should_bypass_proxies` first obtains `no_proxy` from the argument or environment (`no_proxy` takes precedence over `NO_PROXY`). URLs without a hostname bypass automatically. If `no_proxy` is set, the URL bypasses when an IPv4 address matches a listed IP or CIDR network, or when a hostname (with or without its port) ends with a listed entry. If no explicit match is found, Requests temporarily applies the provided `no_proxy` value to the environment and delegates to Python's `proxy_bypass`, which applies platform-specific proxy bypass rules. If bypassing is not indicated, `resolve_proxies` obtains environment proxies and adds the proxy matching the URL scheme, falling back to `all`, unless an explicit proxy for that scheme is already present."",
+  ""file"": ""requests/utils.py"",
+  ""line"": ""765-823, 864-888""
+}",No 
+q04,How does requests choose which proxy to use for a URL?,utils.py,select_proxy,models.py::Response.raise_for_status; adapters.py::HTTPAdapter.proxy_manager_for; adapters.py::HTTPAdapter.get_connection_with_tls_context,no,,no,,,,no,1244,560,openai,gpt-5.6-luna,0.2,1.2,"{
+  ""answer"": ""Requests chooses the proxy before creating the connection, in HTTPAdapter.get_connection_with_tls_context at line 466: `select_proxy(request.url, proxies)`. The proxy mapping is checked for the request URL's scheme, typically in this order: `<scheme>_proxy`, `<scheme>`, `all_proxy`, then `all` (for example, `https_proxy` before `http_proxy` or `all`). Before this, Session-level proxy resolution may merge explicitly supplied proxies with environment proxies when `trust_env=True`, unless the URL matches `no_proxy`. If no proxy is selected, Requests uses its normal PoolManager. If one is selected, it normalizes the URL, creates or reuses a ProxyManager keyed by that proxy URL, and obtains the connection through it. SOCKS proxies use `SOCKSProxyManager`; other proxies use urllib3's regular `ProxyManager`."",
+  ""file"": ""requests.adapters.HTTPAdapter.get_connection_with_tls_context (selection and use: lines 446-491); requests.utils.select_proxy (proxy-key precedence); requests.sessions.resolve_proxies (explicit/environment proxies and no_proxy); requests.adapters.HTTPAdapter.proxy_manager_for (proxy-manager type and caching: lines 266-302)"",
+  ""line"": ""466 selects the proxy; 475-491 choose ProxyManager versus the direct PoolManager; 278-300 cache and construct the selected proxy manager""
+}",No 
+q05,What default HTTP headers does requests add to a request?,utils.py,default_headers,adapters.py::HTTPAdapter.add_headers; adapters.py::HTTPAdapter.build_response; adapters.py::HTTPAdapter.proxy_headers,no,,no,,,,no,796,562,openai,gpt-5.6-luna,0.2,1.2,"{
+  ""answer"": {
+    ""requests_default_headers"": {
+      ""User-Agent"": ""python-requests/<version>"",
+      ""Accept-Encoding"": ""gzip, deflate, br"",
+      ""Accept"": ""*/*"",
+      ""Connection"": ""keep-alive""
+    },
+    ""notes"": [
+      ""The exact Accept-Encoding value depends on installed optional compression support and Requests version; it may also include zstd."",
+      ""Requests adds Content-Length and sometimes Content-Type when preparing a request with a body."",
+      ""The HTTP transport may add Host and other connection-specific headers."",
+      ""Proxy-Authorization is added only when proxy credentials are present.""
+    ]
+  },
+  ""file"": [
+    ""requests/utils.py — default_headers()"",
+    ""requests/sessions.py — Session.__init__()""
+  ],
+  ""line"": ""The supplied HTTPAdapter.add_headers() implementation at lines 578–590 adds no headers by default; proxy authentication is handled by proxy_headers() at lines 592–611.""
+}",No 
+q06,How does requests determine the Content-Length header for a prepared request?,models.py,PreparedRequest.prepare_content_length,adapters.py::HTTPAdapter.send; sessions.py::SessionRedirectMixin.resolve_redirects; utils.py::super_len,no,,no,,,,no,2966,572,openai,gpt-5.6-luna,0.2,1.2,"{
+  ""answer"": ""Requests normally determines Content-Length while preparing the request, not in HTTPAdapter.send. PreparedRequest.prepare_body calls super_len(body). For strings, it first encodes them as UTF-8; otherwise it checks, in order: __len__(), a .len attribute, the file descriptor size via fileno()/fstat(), or—when available—seeks to the end and restores the original position. The returned value is total_length minus the current read position. If a positive length is found, Requests sets Content-Length to that value. For a body whose length cannot be determined, it uses Transfer-Encoding: chunked instead. In HTTPAdapter.send, chunked is selected only when the body is not None and Content-Length is absent. During most redirects, Requests removes Content-Length, Content-Type, and Transfer-Encoding and clears the body before preparing the redirected request again; temporary and permanent redirects preserve the body and headers."",
+  ""file"": [
+    ""requests/models.py — PreparedRequest.prepare_body and prepare_content_length"",
+    ""requests/utils.py — super_len""
+  ],
+  ""line"": [
+    ""requests/utils.py:135-201"",
+    ""HTTPAdapter.send:650 and 667-679"",
+    ""SessionRedirectMixin.resolve_redirects:223-233""
+  ]
+}",No 
+q07,How does requests obtain authentication information when no explicit authentication is supplied?,models.py,PreparedRequest.prepare_auth,models.py::RequestEncodingMixin._encode_files; adapters.py::HTTPAdapter.request_url; models.py::PreparedRequest.prepare_url,no,,no,,,,no,1804,363,openai,gpt-5.6-luna,0.2,1.2,"{
+  ""answer"": ""When no explicit authentication is supplied, requests first checks the Session's default authentication (`session.auth`). If that is also unset, it looks up credentials in the user's `.netrc` file via `get_netrc_auth(url)`, provided environment settings allow it. Credentials embedded in the URL are handled separately during URL preparation."",
+  ""file"": ""requests/sessions.py"",
+  ""line"": ""Session.prepare_request, approximately lines 480-500""
+}",No 
+q08,How does requests create an authentication header for a proxy?,adapters.py,HTTPAdapter.proxy_headers,adapters.py::HTTPAdapter.get_connection_with_tls_context; sessions.py::Session.__init__; sessions.py::Session.request,no,,no,,,,no,2216,387,openai,gpt-5.6-luna,0.2,1.2,"{
+  ""answer"": ""Requests does not create the proxy authentication header in `get_connection_with_tls_context` itself. That method selects and parses the proxy URL, then obtains a proxy manager via `self.proxy_manager_for(proxy)` (adapters.py, lines 475–484). `HTTPAdapter.proxy_manager_for()` extracts credentials embedded in the proxy URL, such as `http://user:password@proxy.example:8080`, and calls `proxy_headers(proxy)`. `proxy_headers()` uses `get_auth_from_url()` to obtain the username and password, then creates a Basic authentication value with `_basic_auth_str()` and returns `{\""Proxy-Authorization\"": \""Basic <base64(user:password)>\""}`. The resulting headers are passed to urllib3's `ProxyManager`, which sends them to the proxy. This is distinct from the destination-server `Authorization` header. If the proxy URL has no credentials, Requests does not generate a proxy authentication header; a proxy may instead respond with `407 Proxy Authentication Required`."",
+  ""file"": ""src/requests/adapters.py"",
+  ""line"": ""HTTPAdapter.get_connection_with_tls_context: 466–486; HTTPAdapter.proxy_manager_for and proxy_headers: approximately 240–285 (exact lines vary by Requests version)""
+}",No 
+q09,How does requests configure HTTPS certificate verification?,adapters.py,HTTPAdapter.cert_verify,sessions.py::Session.__init__; adapters.py::HTTPAdapter.cert_verify; api.py::request,yes,2,no,,,,no,2174,187,openai,gpt-5.6-luna,0.2,1.2,"{
+  ""answer"": ""Requests enables HTTPS certificate verification by default: each Session starts with `verify = True`. A request can override this with `verify=False`, which disables certificate and hostname/expiry checks, or with `verify='/path/to/ca-bundle'`, which uses the specified CA bundle or directory. The `HTTPAdapter.cert_verify` method applies this setting to the urllib3 connection: truthy values set `CERT_REQUIRED`; a string is validated and configured as `ca_certs` or `ca_cert_dir`; false values set `CERT_NONE`. The separate `cert` option configures the client certificate, either as a file path or a `(cert, key)` pair."",
+  ""file"": ""sessions.py, adapters.py, api.py"",
+  ""line"": ""sessions.py: 416-424; adapters.py: 304-357; api.py: 39-44""
+}",No 
+q10,Why did the requests developers choose their current redirect authentication policy instead of another design?,,,utils.py::super_len; models.py::PreparedRequest.prepare_body; sessions.py::SessionRedirectMixin.resolve_redirects,n/a,,no,,,,no,2616,323,openai,gpt-5.6-luna,0.2,1.2,"{
+  ""answer"": ""Requests uses a conservative redirect-authentication policy to prevent credentials from being disclosed to an unrelated host. Authentication is retained when the redirect remains on the same host, but it is rebuilt—and typically removed—when the hostname changes. This is safer than blindly copying the Authorization header across redirects, because a server could redirect a client to an attacker-controlled domain and thereby capture its credentials. Requests can then reapply credentials appropriate for the destination, such as credentials discovered from the local netrc configuration. The policy also treats redirects as a change of request security context: cookies are cleared and reconstructed for the new request, while request bodies and their framing headers are discarded for redirects that may change the method. These choices favor preventing credential and data leakage over preserving every aspect of the original request."",
+  ""file"": ""requests/sessions.py"",
+  ""line"": ""245-246 (rebuild_auth); related redirect sanitization at 229-243""
+}",No 

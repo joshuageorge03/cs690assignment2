@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "edf33c0d5421db03772a5b8e8288d47e",
+  "asked_at": "2026-10-03T22:03:35+00:00",
+  "input_tokens": 54692,
+  "output_tokens": 66,
+  "text": "{\"answer\":\"Requests removes the Authorization header during a redirect when should_strip_auth returns True—typically if the hostname changes, the port changes, or the scheme changes. It preserves authorization for an HTTP-to-HTTPS redirect on standard ports and for unchanged schemes using default ports.\",\"file\":\"sessions.py\",\"line\":290}"
+}

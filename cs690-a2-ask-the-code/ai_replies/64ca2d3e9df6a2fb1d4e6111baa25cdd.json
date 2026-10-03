@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "64ca2d3e9df6a2fb1d4e6111baa25cdd",
+  "asked_at": "2026-10-03T22:44:16+00:00",
+  "input_tokens": 1275,
+  "output_tokens": 271,
+  "text": "{\n  \"answer\": \"Requests bypasses proxies in two stages. In `resolve_proxies`, it calls `should_bypass_proxies` when `trust_env` is enabled. `should_bypass_proxies` first obtains `no_proxy` from the argument or environment (`no_proxy` takes precedence over `NO_PROXY`). URLs without a hostname bypass automatically. If `no_proxy` is set, the URL bypasses when an IPv4 address matches a listed IP or CIDR network, or when a hostname (with or without its port) ends with a listed entry. If no explicit match is found, Requests temporarily applies the provided `no_proxy` value to the environment and delegates to Python's `proxy_bypass`, which applies platform-specific proxy bypass rules. If bypassing is not indicated, `resolve_proxies` obtains environment proxies and adds the proxy matching the URL scheme, falling back to `all`, unless an explicit proxy for that scheme is already present.\",\n  \"file\": \"requests/utils.py\",\n  \"line\": \"765-823, 864-888\"\n}"
+}

@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "a9747ba195ac79900cd63b08545184dd",
+  "asked_at": "2026-10-03T22:03:52+00:00",
+  "input_tokens": 54689,
+  "output_tokens": 114,
+  "text": "{\"answer\":\"HTTPS certificate verification is enabled by default with `Session.verify = True`. For HTTPS requests, the adapter sets `CERT_REQUIRED`; it uses a preloaded SSL context containing the default CA bundle from certifi. If `verify` is `False`, it sets `CERT_NONE`. If `verify` is a string, it uses that path as either a CA certificate file or directory. Client certificates can also be supplied via `cert` as a path or `(cert_file, key_file)` tuple.\",\"file\":\"sessions.py\",\"line\":417}"
+}

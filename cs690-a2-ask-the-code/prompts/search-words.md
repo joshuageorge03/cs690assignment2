@@ -1,0 +1,1 @@
+Asked ChatGPT to provide the code for the search_words function in askcode/search_words.py and explain how it works. I wanted the function to follow the Step 3 requirements for word-based search, including removing stopwords, scoring chunks based on matching words, and returning the top results.

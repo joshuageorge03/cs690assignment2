@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "20d64790976750cd4195de0ce0fdeb3d",
+  "asked_at": "2026-10-03T22:04:56+00:00",
+  "input_tokens": 800,
+  "output_tokens": 174,
+  "text": "{\"answer\":\"It first uses the explicit `no_proxy` value, or falls back to the `no_proxy`/`NO_PROXY` environment variable. URLs without a hostname bypass proxies. For IPv4 hosts, it bypasses when an entry is a matching IP or CIDR network; for other hosts, it bypasses when the hostname or hostname-with-port ends with a `no_proxy` entry. If no match is found, it calls `proxy_bypass()` and bypasses when that returns true; errors from that call result in no bypass.\",\"file\":\"utils.py\",\"line\":765}"
+}

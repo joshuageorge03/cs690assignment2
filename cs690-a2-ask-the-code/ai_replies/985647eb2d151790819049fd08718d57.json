@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "985647eb2d151790819049fd08718d57",
+  "asked_at": "2026-10-03T22:44:48+00:00",
+  "input_tokens": 2174,
+  "output_tokens": 187,
+  "text": "{\n  \"answer\": \"Requests enables HTTPS certificate verification by default: each Session starts with `verify = True`. A request can override this with `verify=False`, which disables certificate and hostname/expiry checks, or with `verify='/path/to/ca-bundle'`, which uses the specified CA bundle or directory. The `HTTPAdapter.cert_verify` method applies this setting to the urllib3 connection: truthy values set `CERT_REQUIRED`; a string is validated and configured as `ca_certs` or `ca_cert_dir`; false values set `CERT_NONE`. The separate `cert` option configures the client certificate, either as a file path or a `(cert, key)` pair.\",\n  \"file\": \"sessions.py, adapters.py, api.py\",\n  \"line\": \"sessions.py: 416-424; adapters.py: 304-357; api.py: 39-44\"\n}"
+}

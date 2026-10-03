@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "81bb806f5aace23f44b1db0e8be09f99",
+  "asked_at": "2026-10-03T22:44:42+00:00",
+  "input_tokens": 1804,
+  "output_tokens": 363,
+  "text": "{\n  \"answer\": \"When no explicit authentication is supplied, requests first checks the Session's default authentication (`session.auth`). If that is also unset, it looks up credentials in the user's `.netrc` file via `get_netrc_auth(url)`, provided environment settings allow it. Credentials embedded in the URL are handled separately during URL preparation.\",\n  \"file\": \"requests/sessions.py\",\n  \"line\": \"Session.prepare_request, approximately lines 480-500\"\n}"
+}

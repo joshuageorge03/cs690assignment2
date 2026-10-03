@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "f712fe24a10446cc561901e310c377ef",
+  "asked_at": "2026-10-03T21:58:02+00:00",
+  "input_tokens": 2972,
+  "output_tokens": 48,
+  "text": "{\"answer\":\"It calls `self.get_redirect_target(resp)` to obtain the redirect URL from the response, first at line 175 and again at line 279 for subsequent redirects.\",\"file\":\"sessions.py\",\"line\":175}"
+}

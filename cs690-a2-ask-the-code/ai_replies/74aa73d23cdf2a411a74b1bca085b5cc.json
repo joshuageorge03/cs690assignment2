@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "74aa73d23cdf2a411a74b1bca085b5cc",
+  "asked_at": "2026-10-03T22:44:54+00:00",
+  "input_tokens": 2616,
+  "output_tokens": 323,
+  "text": "{\n  \"answer\": \"Requests uses a conservative redirect-authentication policy to prevent credentials from being disclosed to an unrelated host. Authentication is retained when the redirect remains on the same host, but it is rebuilt—and typically removed—when the hostname changes. This is safer than blindly copying the Authorization header across redirects, because a server could redirect a client to an attacker-controlled domain and thereby capture its credentials. Requests can then reapply credentials appropriate for the destination, such as credentials discovered from the local netrc configuration. The policy also treats redirects as a change of request security context: cookies are cleared and reconstructed for the new request, while request bodies and their framing headers are discarded for redirects that may change the method. These choices favor preventing credential and data leakage over preserving every aspect of the original request.\",\n  \"file\": \"requests/sessions.py\",\n  \"line\": \"245-246 (rebuild_auth); related redirect sanitization at 229-243\"\n}"
+}
